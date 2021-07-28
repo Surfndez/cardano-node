@@ -591,9 +591,10 @@ module Cardano.Api (
 
     -- ** Monadic queries
     LocalStateQueryExpr,
-    sendMsgQuery,
     executeQueryLocalState,
-    executeQueryLocalStateWithChainSync
+    executeQueryLocalStateWithChainSync,
+    queryExpr,
+    determineEraExpr
   ) where
 
 import           Cardano.Api.Address
