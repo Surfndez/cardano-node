@@ -30,12 +30,9 @@
   # Disable plutus-example on Windows because Windows builds are cross-compiled which
   # does not work for plugins that are used by plutus-example.
   + lib.optionalString stdenv.hostPlatform.isWindows ''
-    package plutus-example
-      flags: -buildable
-    package plutus-ledger
-      flags: -buildable
+    -- When cross compiling we don't have a `ghc` package
     package plutus-tx-plugin
-      flags: -buildable
+      flags: +use-ghc-stub
   ''
   # Needed for the Windows cabal constraint solver.
   + lib.optionalString stdenv.hostPlatform.isWindows ''
@@ -74,12 +71,9 @@ let
       })
       {
         # Tell `release-lib` what to exclude these from windows builds
-        packages.plutus-example.components.library.platforms = with lib.platforms; [ linux darwin ];
-        packages.plutus-example.components.exes.plutus-example.platforms = with lib.platforms; [ linux darwin ];
-        packages.plutus-ledger.components.library.platforms = with lib.platforms; [ linux darwin ];
-        packages.plutus-ledger.components.exes.plutus-example.platforms = with lib.platforms; [ linux darwin ];
-        packages.plutus-tx-plugin.components.library.platforms = with lib.platforms; [ linux darwin ];
-        packages.plutus-tx-plugin.components.exes.plutus-example.platforms = with lib.platforms; [ linux darwin ];
+        packages.plutus-example.components.library.buildable = false;
+        packages.plutus-ledger.components.library.buildable = false;
+        packages.plutus-tx-plugin.components.library.buildable = false;
       }
       {
         # Needed for the CLI tests.
