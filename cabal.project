@@ -250,6 +250,7 @@ source-repository-package
     plutus-tx
     plutus-tx-plugin
     prettyprinter-configurable
+    stubs/plutus-ghc-stub
     word-array
 
 -- Drops an instance breaking our code. Should be released to Hackage eventually.
