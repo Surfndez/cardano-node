@@ -71,9 +71,9 @@ let
       })
       {
         # Tell `release-lib` what to exclude these from windows builds
-        packages.plutus-example.components.library.buildable = false;
-        packages.plutus-ledger.components.library.buildable = false;
-        packages.plutus-tx-plugin.components.library.buildable = false;
+        packages.plutus-example.components.library.buildable = lib.mkForce false;
+        packages.plutus-ledger.components.library.buildable = lib.mkForce false;
+        packages.plutus-tx-plugin.components.library.buildable = lib.mkForce false;
       }
       {
         # Needed for the CLI tests.
