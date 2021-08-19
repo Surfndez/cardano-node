@@ -114,7 +114,7 @@ jobs:
 
     - name: Record dependencies
       run: |
-        cabal build all --only-dependencies --dry-run
+        cabal build all --dry-run
         cat ${{ env.PLAN_JSON }} | jq -r '."install-plan"[].id' | sort | uniq > dependencies.txt
         date > date.txt
 
@@ -127,9 +127,6 @@ jobs:
           cache-${{ env.CACHE_VERSION }}-${{ runner.os }}-${{ matrix.ghc }}-${{ hashFiles('dependencies.txt') }}-${{ hashFiles('date.txt') }}
           cache-${{ env.CACHE_VERSION }}-${{ runner.os }}-${{ matrix.ghc }}-${{ hashFiles('dependencies.txt') }}
           cache-${{ env.CACHE_VERSION }}-${{ runner.os }}-${{ matrix.ghc }}
-
-    - name: Install dependencies
-      run: retry 2 cabal build all --only-dependencies
 
     - name: Build
       run: retry 2 cabal build cardano-node cardano-cli cardano-node-chairman cardano-submit-api
